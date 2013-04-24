@@ -17,7 +17,7 @@
                 <!-- Source message -->
                 <Label Content="Message" Grid.Row="0"/>
                 <Button Content="Load" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="6,4,6,4"/>
-                <TextBox Grid.Row="1" Margin="6,0,6,0"/>
+                <TextBox Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" TextWrapping="Wrap"/>
 
                 <!-- Signing key -->
                 <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
@@ -47,7 +47,7 @@
 
                 <!-- Signature -->
                 <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,106,6"/>
+                <TextBox Grid.Row="4" Margin="6,0,106,6" FontFamily="Consolas"/>
                 <Button Content="Generate" Width="94" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
             </Grid>
         </TabItem>
@@ -61,10 +61,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Source message -->
-                <Label Content="Message" Grid.Row="0"/>
+                <!-- Signed message -->
+                <Label Content="Signed Message, including signature" Grid.Row="0"/>
                 <Button Content="Load" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="6,4,6,4"/>
-                <TextBox Grid.Row="1" Margin="6,0,6,0"/>
+                <TextBox Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" TextWrapping="Wrap"/>
 
                 <!-- Signing key -->
                 <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
@@ -85,17 +85,15 @@
                         <Label Content="g" Grid.Column="2" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="3" Margin="0,4,0,0"/>
 
-                        <Label Content="x" Grid.Column="4" Margin="6,0,0,0"/>
+                        <Label Content="y" Grid.Column="4" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="5" Margin="0,4,0,0"/>
 
                         <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
                     </Grid>
                 </GroupBox>
 
-                <!-- Signature -->
-                <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,106,6"/>
-                <Button Content="Generate" Width="94" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
+                <!-- Verify Button -->
+                <Button Content="Verify" Width="94" HorizontalAlignment="Right" Grid.Row="3" Margin="6,0,6,6" IsDefault="True"/>
             </Grid>
         </TabItem>
     </TabControl>
