@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,52 @@ namespace SiGamal
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        // --- Generic UI logic ---
+
+        private string ShowOpenDialog(string filter = "All files (*.*)|*.*")
+        {
+            // Instantiate open file dialog
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = "";
+            dlg.Filter = filter;
+
+            // Show dialog
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process choice
+            if (result == true)
+            {
+                return dlg.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private string ShowSaveDialog(string filter = "All files (*.*)|*.*")
+        {
+            // Instantiate save file dialog
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = "";
+            dlg.Filter = filter;
+
+            // Show dialog
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process choice
+            if (result == true)
+            {
+                return dlg.FileName;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
