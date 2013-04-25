@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SiGamal.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SiGamal" Height="350" Width="525">
+        Title="SiGamal" Width="800" Height="600">
 
     <TabControl Margin="12">
         <TabItem Header="Sign">
@@ -16,7 +16,7 @@
 
                 <!-- Source message -->
                 <Label Content="Message" Grid.Row="0"/>
-                <Button Content="Load" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="6,4,6,4"/>
+                <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="6,4,6,4"/>
                 <TextBox Grid.Row="1" Margin="6,0,6,0"/>
 
                 <!-- Signing key -->
@@ -58,16 +58,16 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Source message -->
-                <Label Content="Message" Grid.Row="0"/>
-                <Button Content="Load" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="6,4,6,4"/>
-                <TextBox Grid.Row="1" Margin="6,0,6,0"/>
+                <!-- Signed message -->
+                <Label Content="Signed message (including signature)" Grid.Row="0"/>
+                <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="6,4,6,4"/>
+                <TextBox Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas"/>
 
                 <!-- Signing key -->
                 <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
+                    <!-- TODO Update parameters for this key -->
                     <Grid Margin="0,6,0,3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -85,19 +85,75 @@
                         <Label Content="g" Grid.Column="2" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="3" Margin="0,4,0,0"/>
 
-                        <Label Content="x" Grid.Column="4" Margin="6,0,0,0"/>
+                        <Label Content="y" Grid.Column="4" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="5" Margin="0,4,0,0"/>
 
                         <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
                     </Grid>
                 </GroupBox>
 
-                <!-- Signature -->
-                <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,106,6"/>
-                <Button Content="Generate" Width="94" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
+                <Button Content="Verify" Width="100" HorizontalAlignment="Right" Grid.Row="3" Margin="6,0,6,6"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Generate Keys">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!-- Shared parameters -->
+                    <RowDefinition Height="1*"/>
+                    
+                    <!-- Non-shared parameters -->
+                    <RowDefinition Height="1*"/>
+                    
+                    <!-- Actions -->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Shared parameters -->
+                <GroupBox Header="Shared Parameters" Margin="6" Grid.Row="0">
+                    <Grid Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="p" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0"/>
+
+                        <Label Content="g" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Non-shared parameters -->
+                <GroupBox Header="Non-shared parameters" Margin="6,0,6,6" Grid.Row="1">
+                    <Grid Margin="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="x (Private Key)" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0"/>
+
+                        <Label Content="y (Public Key)" Grid.Row="1" Grid.Column="0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0"/>
+                    </Grid>
+                </GroupBox>
+
+                <!-- Actions -->
+                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Generate"/>
+                <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,112,6" Width="100" Height="24" Content="Load"/>
+                <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Save"/>
             </Grid>
         </TabItem>
     </TabControl>
-        
+
 </Window>
