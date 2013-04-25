@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,15 @@ namespace SiGamal
         }
 
         // --- Generic UI logic ---
+
+        private void ShowMessageBox(string message,
+            MessageBoxButton button = MessageBoxButton.OK,
+            MessageBoxImage icon = MessageBoxImage.Error)
+        {
+            string messageBoxText = message;
+            string caption = "SiGamal";
+            MessageBox.Show(messageBoxText, caption, button, icon);
+        }
 
         private string ShowOpenDialog(string filter = "All files (*.*)|*.*")
         {
@@ -69,6 +79,36 @@ namespace SiGamal
             else
             {
                 return null;
+            }
+        }
+
+        // --- Event handlers ---
+
+        private void LoadUnsignedMessage(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = ShowOpenDialog();
+                string contents = File.ReadAllText(path);
+                UnsignedMessageTextBox.Text = contents;
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message);
+            }
+        }
+
+        private void LoadSignedMessage(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string path = ShowOpenDialog();
+                string contents = File.ReadAllText(path);
+                SignedMessageTextBox.Text = contents;
+            }
+            catch (Exception ex)
+            {
+                ShowMessageBox(ex.Message);
             }
         }
     }
