@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
 
@@ -16,7 +17,8 @@ namespace SiGamalOutlookAddin
         private string toolBarTagEmail = "Sign Email";
 
         private Office.CommandBarButton signBarButton;
-        
+        private Office.CommandBarButton verifyButton;
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             inspectors = this.Application.Inspectors;
@@ -58,13 +60,17 @@ namespace SiGamalOutlookAddin
 
                 Office.CommandBar _ObjCommandBar = Inspector.CommandBars.Add(toolBarTagEmail, Office.MsoBarPosition.msoBarBottom, false, true);
                 signBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
-
+                verifyButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
+                
                 if (!IsExists)
                 {
                     signBarButton.Caption = "Sign Message";
                     signBarButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
                     signBarButton.FaceId = 500;
                     signBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(signBarButton_Click);
+                    verifyButton.Caption = "Verify";
+                    verifyButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
+                    verifyButton.FaceId = 500;
                     _ObjCommandBar.Visible = true;
                     
                 }
@@ -75,7 +81,6 @@ namespace SiGamalOutlookAddin
         {
             try
             {
-                
                 SignEmail();
                 System.Windows.Forms.MessageBox.Show("Signing ...");
             }
