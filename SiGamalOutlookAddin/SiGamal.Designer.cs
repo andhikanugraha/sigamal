@@ -30,24 +30,25 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SignButton = new System.Windows.Forms.Button();
+            this.RandomKeySignButton = new System.Windows.Forms.Button();
+            this.LoadKeySignButton = new System.Windows.Forms.Button();
+            this.xSignTextBox = new System.Windows.Forms.TextBox();
+            this.gSignTextBox = new System.Windows.Forms.TextBox();
+            this.pSignTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.p = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.pVerifyTextBox = new System.Windows.Forms.TextBox();
+            this.gVerifyTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.yVerifyTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.LoadKeyVerifyButton = new System.Windows.Forms.Button();
+            this.VerifyButton = new System.Windows.Forms.Button();
+            this.SaveKeySignButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -65,12 +66,13 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.SaveKeySignButton);
+            this.tabPage1.Controls.Add(this.SignButton);
+            this.tabPage1.Controls.Add(this.RandomKeySignButton);
+            this.tabPage1.Controls.Add(this.LoadKeySignButton);
+            this.tabPage1.Controls.Add(this.xSignTextBox);
+            this.tabPage1.Controls.Add(this.gSignTextBox);
+            this.tabPage1.Controls.Add(this.pSignTextBox);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.p);
@@ -83,53 +85,53 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // button3
+            // SignButton
             // 
-            this.button3.Location = new System.Drawing.Point(397, 34);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Sign";
-            this.button3.UseVisualStyleBackColor = true;
+            this.SignButton.Location = new System.Drawing.Point(397, 34);
+            this.SignButton.Name = "SignButton";
+            this.SignButton.Size = new System.Drawing.Size(75, 23);
+            this.SignButton.TabIndex = 8;
+            this.SignButton.Text = "Sign";
+            this.SignButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // RandomKeySignButton
             // 
-            this.button2.Location = new System.Drawing.Point(316, 34);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Random";
-            this.button2.UseVisualStyleBackColor = true;
+            this.RandomKeySignButton.Location = new System.Drawing.Point(154, 34);
+            this.RandomKeySignButton.Name = "RandomKeySignButton";
+            this.RandomKeySignButton.Size = new System.Drawing.Size(75, 23);
+            this.RandomKeySignButton.TabIndex = 7;
+            this.RandomKeySignButton.Text = "Random";
+            this.RandomKeySignButton.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // LoadKeySignButton
             // 
-            this.button1.Location = new System.Drawing.Point(233, 34);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Load";
-            this.button1.UseVisualStyleBackColor = true;
+            this.LoadKeySignButton.Location = new System.Drawing.Point(235, 34);
+            this.LoadKeySignButton.Name = "LoadKeySignButton";
+            this.LoadKeySignButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadKeySignButton.TabIndex = 6;
+            this.LoadKeySignButton.Text = "Load";
+            this.LoadKeySignButton.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // xSignTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(291, 7);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 5;
+            this.xSignTextBox.Location = new System.Drawing.Point(291, 7);
+            this.xSignTextBox.Name = "xSignTextBox";
+            this.xSignTextBox.Size = new System.Drawing.Size(100, 20);
+            this.xSignTextBox.TabIndex = 5;
             // 
-            // textBox2
+            // gSignTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(160, 7);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.gSignTextBox.Location = new System.Drawing.Point(160, 7);
+            this.gSignTextBox.Name = "gSignTextBox";
+            this.gSignTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gSignTextBox.TabIndex = 4;
             // 
-            // textBox1
+            // pSignTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(27, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.pSignTextBox.Location = new System.Drawing.Point(27, 7);
+            this.pSignTextBox.Name = "pSignTextBox";
+            this.pSignTextBox.Size = new System.Drawing.Size(100, 20);
+            this.pSignTextBox.TabIndex = 3;
             // 
             // label2
             // 
@@ -160,13 +162,13 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
-            this.tabPage2.Controls.Add(this.textBox6);
+            this.tabPage2.Controls.Add(this.VerifyButton);
+            this.tabPage2.Controls.Add(this.LoadKeyVerifyButton);
+            this.tabPage2.Controls.Add(this.yVerifyTextBox);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox5);
+            this.tabPage2.Controls.Add(this.gVerifyTextBox);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.pVerifyTextBox);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -185,19 +187,19 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "p";
             // 
-            // textBox4
+            // pVerifyTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(27, 7);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 1;
+            this.pVerifyTextBox.Location = new System.Drawing.Point(27, 7);
+            this.pVerifyTextBox.Name = "pVerifyTextBox";
+            this.pVerifyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.pVerifyTextBox.TabIndex = 1;
             // 
-            // textBox5
+            // gVerifyTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(163, 7);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 3;
+            this.gVerifyTextBox.Location = new System.Drawing.Point(163, 7);
+            this.gVerifyTextBox.Name = "gVerifyTextBox";
+            this.gVerifyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gVerifyTextBox.TabIndex = 3;
             // 
             // label4
             // 
@@ -208,12 +210,12 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "g";
             // 
-            // textBox6
+            // yVerifyTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(300, 7);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 5;
+            this.yVerifyTextBox.Location = new System.Drawing.Point(300, 7);
+            this.yVerifyTextBox.Name = "yVerifyTextBox";
+            this.yVerifyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.yVerifyTextBox.TabIndex = 5;
             // 
             // label5
             // 
@@ -224,23 +226,32 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "y";
             // 
-            // button4
+            // LoadKeyVerifyButton
             // 
-            this.button4.Location = new System.Drawing.Point(264, 33);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Load";
-            this.button4.UseVisualStyleBackColor = true;
+            this.LoadKeyVerifyButton.Location = new System.Drawing.Point(264, 33);
+            this.LoadKeyVerifyButton.Name = "LoadKeyVerifyButton";
+            this.LoadKeyVerifyButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadKeyVerifyButton.TabIndex = 6;
+            this.LoadKeyVerifyButton.Text = "Load";
+            this.LoadKeyVerifyButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // VerifyButton
             // 
-            this.button5.Location = new System.Drawing.Point(345, 33);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Verify";
-            this.button5.UseVisualStyleBackColor = true;
+            this.VerifyButton.Location = new System.Drawing.Point(345, 33);
+            this.VerifyButton.Name = "VerifyButton";
+            this.VerifyButton.Size = new System.Drawing.Size(75, 23);
+            this.VerifyButton.TabIndex = 7;
+            this.VerifyButton.Text = "Verify";
+            this.VerifyButton.UseVisualStyleBackColor = true;
+            // 
+            // SaveKeySignButton
+            // 
+            this.SaveKeySignButton.Location = new System.Drawing.Point(316, 34);
+            this.SaveKeySignButton.Name = "SaveKeySignButton";
+            this.SaveKeySignButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveKeySignButton.TabIndex = 9;
+            this.SaveKeySignButton.Text = "Save Button";
+            this.SaveKeySignButton.UseVisualStyleBackColor = true;
             // 
             // SiGamal
             // 
@@ -264,22 +275,23 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button SignButton;
+        private System.Windows.Forms.Button RandomKeySignButton;
+        private System.Windows.Forms.Button LoadKeySignButton;
+        private System.Windows.Forms.TextBox xSignTextBox;
+        private System.Windows.Forms.TextBox gSignTextBox;
+        private System.Windows.Forms.TextBox pSignTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label p;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button VerifyButton;
+        private System.Windows.Forms.Button LoadKeyVerifyButton;
+        private System.Windows.Forms.TextBox yVerifyTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox gVerifyTextBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox pVerifyTextBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button SaveKeySignButton;
     }
 }
