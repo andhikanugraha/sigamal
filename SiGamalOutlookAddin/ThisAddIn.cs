@@ -16,7 +16,7 @@ namespace SiGamalOutlookAddin
         // Controll @ Toolbar
         private string toolBarTagEmail = "Sign Email";
 
-        private Office.CommandBarButton signBarButton;
+        private Office.CommandBarButton siGamalBarButton;
         private Office.CommandBarButton verifyButton;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
@@ -59,30 +59,30 @@ namespace SiGamalOutlookAddin
                 }
 
                 Office.CommandBar _ObjCommandBar = Inspector.CommandBars.Add(toolBarTagEmail, Office.MsoBarPosition.msoBarBottom, false, true);
-                signBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
-                verifyButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
+                siGamalBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
                 
                 if (!IsExists)
                 {
-                    signBarButton.Caption = "Sign Message";
-                    signBarButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
-                    signBarButton.FaceId = 500;
-                    signBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(signBarButton_Click);
-                    verifyButton.Caption = "Verify";
-                    verifyButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
-                    verifyButton.FaceId = 500;
-                    _ObjCommandBar.Visible = true;
+                    siGamalBarButton.Caption = "Si-Gamal";
+                    siGamalBarButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
+                    siGamalBarButton.FaceId = 500;
+                    siGamalBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(siGamalBarButton_Click);
+                    
                     
                 }
             }
         }
 
-        private void signBarButton_Click(Office.CommandBarButton ctrl, ref bool cancel)
+        private void siGamalBarButton_Click(Office.CommandBarButton ctrl, ref bool cancel)
         {
             try
             {
-                SignEmail();
-                System.Windows.Forms.MessageBox.Show("Signing ...");
+                SiGamal view = new SiGamal();
+                view.ShowDialog();
+                if (view.isSign)
+                    SignEmail();
+                else
+                    VerifyEmail();
             }
             catch (System.Exception ex)
             {
@@ -100,11 +100,28 @@ namespace SiGamalOutlookAddin
             {
                 if (item.EntryID == null)
                 {
-                    item.Body += "\n Sign";
+                    // Put Algorithm Sign Here
+                    item.Body += "\n<sign>"+ "Key String Sign" +"<sign>";
                 }
 
             }
         }
+        private void VerifyEmail()
+        {
+            Outlook.Application application = Globals.ThisAddIn.Application;
+            Outlook.Inspector inspector = application.ActiveInspector();
+            Outlook.MailItem item = (Outlook.MailItem)inspector.CurrentItem;
+            //Outlook.MailItem item = Outlook. Inspector.CurrentItem as Outlook.MailItem;
+            if (item != null)
+            {
+                if (item.EntryID == null)
+                {
+                    // Put Algorithm Verify Here
+                }
+
+            }
+        }
+        
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }

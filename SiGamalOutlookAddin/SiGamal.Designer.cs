@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.SaveKeySignButton = new System.Windows.Forms.Button();
             this.SignButton = new System.Windows.Forms.Button();
             this.RandomKeySignButton = new System.Windows.Forms.Button();
             this.LoadKeySignButton = new System.Windows.Forms.Button();
@@ -40,15 +41,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.p = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pVerifyTextBox = new System.Windows.Forms.TextBox();
-            this.gVerifyTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.VerifyButton = new System.Windows.Forms.Button();
+            this.LoadKeyVerifyButton = new System.Windows.Forms.Button();
             this.yVerifyTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.LoadKeyVerifyButton = new System.Windows.Forms.Button();
-            this.VerifyButton = new System.Windows.Forms.Button();
-            this.SaveKeySignButton = new System.Windows.Forms.Button();
+            this.gVerifyTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pVerifyTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -85,6 +85,16 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // SaveKeySignButton
+            // 
+            this.SaveKeySignButton.Location = new System.Drawing.Point(316, 34);
+            this.SaveKeySignButton.Name = "SaveKeySignButton";
+            this.SaveKeySignButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveKeySignButton.TabIndex = 9;
+            this.SaveKeySignButton.Text = "Save Button";
+            this.SaveKeySignButton.UseVisualStyleBackColor = true;
+            this.SaveKeySignButton.Click += new System.EventHandler(this.SaveKeySignButton_Click);
+            // 
             // SignButton
             // 
             this.SignButton.Location = new System.Drawing.Point(397, 34);
@@ -93,6 +103,7 @@
             this.SignButton.TabIndex = 8;
             this.SignButton.Text = "Sign";
             this.SignButton.UseVisualStyleBackColor = true;
+            this.SignButton.Click += new System.EventHandler(this.SignButton_Click);
             // 
             // RandomKeySignButton
             // 
@@ -102,6 +113,7 @@
             this.RandomKeySignButton.TabIndex = 7;
             this.RandomKeySignButton.Text = "Random";
             this.RandomKeySignButton.UseVisualStyleBackColor = true;
+            this.RandomKeySignButton.Click += new System.EventHandler(this.RandomKeySignButton_Click);
             // 
             // LoadKeySignButton
             // 
@@ -111,6 +123,7 @@
             this.LoadKeySignButton.TabIndex = 6;
             this.LoadKeySignButton.Text = "Load";
             this.LoadKeySignButton.UseVisualStyleBackColor = true;
+            this.LoadKeySignButton.Click += new System.EventHandler(this.LoadKeySignButton_Click);
             // 
             // xSignTextBox
             // 
@@ -118,6 +131,7 @@
             this.xSignTextBox.Name = "xSignTextBox";
             this.xSignTextBox.Size = new System.Drawing.Size(100, 20);
             this.xSignTextBox.TabIndex = 5;
+            this.xSignTextBox.Text = "0";
             // 
             // gSignTextBox
             // 
@@ -125,6 +139,7 @@
             this.gSignTextBox.Name = "gSignTextBox";
             this.gSignTextBox.Size = new System.Drawing.Size(100, 20);
             this.gSignTextBox.TabIndex = 4;
+            this.gSignTextBox.Text = "0";
             // 
             // pSignTextBox
             // 
@@ -132,6 +147,7 @@
             this.pSignTextBox.Name = "pSignTextBox";
             this.pSignTextBox.Size = new System.Drawing.Size(100, 20);
             this.pSignTextBox.TabIndex = 3;
+            this.pSignTextBox.Text = "0";
             // 
             // label2
             // 
@@ -178,37 +194,25 @@
             this.tabPage2.Text = "Verify";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // VerifyButton
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "p";
+            this.VerifyButton.Location = new System.Drawing.Point(345, 33);
+            this.VerifyButton.Name = "VerifyButton";
+            this.VerifyButton.Size = new System.Drawing.Size(75, 23);
+            this.VerifyButton.TabIndex = 7;
+            this.VerifyButton.Text = "Verify";
+            this.VerifyButton.UseVisualStyleBackColor = true;
+            this.VerifyButton.Click += new System.EventHandler(this.VerifyButton_Click);
             // 
-            // pVerifyTextBox
+            // LoadKeyVerifyButton
             // 
-            this.pVerifyTextBox.Location = new System.Drawing.Point(27, 7);
-            this.pVerifyTextBox.Name = "pVerifyTextBox";
-            this.pVerifyTextBox.Size = new System.Drawing.Size(100, 20);
-            this.pVerifyTextBox.TabIndex = 1;
-            // 
-            // gVerifyTextBox
-            // 
-            this.gVerifyTextBox.Location = new System.Drawing.Point(163, 7);
-            this.gVerifyTextBox.Name = "gVerifyTextBox";
-            this.gVerifyTextBox.Size = new System.Drawing.Size(100, 20);
-            this.gVerifyTextBox.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(143, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(13, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "g";
+            this.LoadKeyVerifyButton.Location = new System.Drawing.Point(264, 33);
+            this.LoadKeyVerifyButton.Name = "LoadKeyVerifyButton";
+            this.LoadKeyVerifyButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadKeyVerifyButton.TabIndex = 6;
+            this.LoadKeyVerifyButton.Text = "Load";
+            this.LoadKeyVerifyButton.UseVisualStyleBackColor = true;
+            this.LoadKeyVerifyButton.Click += new System.EventHandler(this.LoadKeyVerifyButton_Click);
             // 
             // yVerifyTextBox
             // 
@@ -216,6 +220,7 @@
             this.yVerifyTextBox.Name = "yVerifyTextBox";
             this.yVerifyTextBox.Size = new System.Drawing.Size(100, 20);
             this.yVerifyTextBox.TabIndex = 5;
+            this.yVerifyTextBox.Text = "0";
             // 
             // label5
             // 
@@ -226,32 +231,39 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "y";
             // 
-            // LoadKeyVerifyButton
+            // gVerifyTextBox
             // 
-            this.LoadKeyVerifyButton.Location = new System.Drawing.Point(264, 33);
-            this.LoadKeyVerifyButton.Name = "LoadKeyVerifyButton";
-            this.LoadKeyVerifyButton.Size = new System.Drawing.Size(75, 23);
-            this.LoadKeyVerifyButton.TabIndex = 6;
-            this.LoadKeyVerifyButton.Text = "Load";
-            this.LoadKeyVerifyButton.UseVisualStyleBackColor = true;
+            this.gVerifyTextBox.Location = new System.Drawing.Point(163, 7);
+            this.gVerifyTextBox.Name = "gVerifyTextBox";
+            this.gVerifyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gVerifyTextBox.TabIndex = 3;
+            this.gVerifyTextBox.Text = "0";
             // 
-            // VerifyButton
+            // label4
             // 
-            this.VerifyButton.Location = new System.Drawing.Point(345, 33);
-            this.VerifyButton.Name = "VerifyButton";
-            this.VerifyButton.Size = new System.Drawing.Size(75, 23);
-            this.VerifyButton.TabIndex = 7;
-            this.VerifyButton.Text = "Verify";
-            this.VerifyButton.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(143, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(13, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "g";
             // 
-            // SaveKeySignButton
+            // pVerifyTextBox
             // 
-            this.SaveKeySignButton.Location = new System.Drawing.Point(316, 34);
-            this.SaveKeySignButton.Name = "SaveKeySignButton";
-            this.SaveKeySignButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveKeySignButton.TabIndex = 9;
-            this.SaveKeySignButton.Text = "Save Button";
-            this.SaveKeySignButton.UseVisualStyleBackColor = true;
+            this.pVerifyTextBox.Location = new System.Drawing.Point(27, 7);
+            this.pVerifyTextBox.Name = "pVerifyTextBox";
+            this.pVerifyTextBox.Size = new System.Drawing.Size(100, 20);
+            this.pVerifyTextBox.TabIndex = 1;
+            this.pVerifyTextBox.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "p";
             // 
             // SiGamal
             // 
