@@ -23,23 +23,10 @@ namespace SiGamalOutlookAddin
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             inspectors = this.Application.Inspectors;
-            inspectors.NewInspector += new Microsoft.Office.Interop.Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspector);
-            inspectors.NewInspector += new Microsoft.Office.Interop.Outlook.InspectorsEvents_NewInspectorEventHandler(AddToEmail); 
+            //inspectors.NewInspector += new Microsoft.Office.Interop.Outlook.InspectorsEvents_NewInspectorEventHandler(Inspectors_NewInspector);
+            inspectors.NewInspector += new Microsoft.Office.Interop.Outlook.InspectorsEvents_NewInspectorEventHandler(AddToEmail);
         }
 
-        void Inspectors_NewInspector(Outlook.Inspector Inspector)
-        {
-            Outlook.MailItem item = Inspector.CurrentItem as Outlook.MailItem;
-            if (item != null)
-            {
-                if (item.EntryID == null)
-                {
-                    item.Subject = "Adding Subject";
-                    item.Body = "Adding Body";
-                }
-                
-            }
-        }
 
         private void AddToEmail(Microsoft.Office.Interop.Outlook.Inspector Inspector)
         {
@@ -61,7 +48,7 @@ namespace SiGamalOutlookAddin
 
                 Office.CommandBar _ObjCommandBar = Inspector.CommandBars.Add(toolBarTagEmail, Office.MsoBarPosition.msoBarTop, false, true);
                 siGamalBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
-                
+
                 if (!IsExists)
                 {
                     System.Diagnostics.Debug.WriteLine("Add to Mail - 2");
@@ -71,7 +58,7 @@ namespace SiGamalOutlookAddin
                     siGamalBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(siGamalBarButton_Click);
                     _ObjCommandBar.Visible = true;
                     siGamalBarButton.Visible = true;
-                    
+
                 }
             }
         }
@@ -101,14 +88,13 @@ namespace SiGamalOutlookAddin
             //Outlook.MailItem item = Outlook. Inspector.CurrentItem as Outlook.MailItem;
             if (item != null)
             {
-                if (item.EntryID == null)
-                {
-                    // Put Algorithm Sign Here
-                    SHA256 sha = new SHA256();
-                    BigInteger hash = sha.GetMessageDigestToBigInteger(item.Body);
-                    System.Windows.Forms.MessageBox.Show("Hash=" +sha.GetMessageDigestToBigInteger(item.Body).ToString());
-                    item.Body += "\n<sign>"+ SiGamalGenerator.signature(key.P,key.G,key.X,hash) +"<sign>";
-                }
+                string body = item.Body;
+                item.Body = body;
+                // Put Algorithm Sign Here
+                SHA256 sha = new SHA256();
+                BigInteger hash = sha.GetMessageDigestToBigInteger(body);
+                //System.Windows.Forms.MessageBox.Show("Hash=" + sha.GetMessageDigestToBigInteger(item.Body).ToString());
+                item.Body += "<sign>" + SiGamalGenerator.signature(key.P, key.G, key.X, hash) + "<sign>";
 
             }
         }
@@ -120,31 +106,29 @@ namespace SiGamalOutlookAddin
             //Outlook.MailItem item = Outlook. Inspector.CurrentItem as Outlook.MailItem;
             if (item != null)
             {
-                if (item.EntryID == null)
+                // Put Algorithm Verify Here
+                string rs = item.Body.Substring(item.Body.IndexOf("<sign>"));
+                rs = rs.Substring(6);
+                rs = rs.Substring(0, rs.IndexOf("<sign>"));
+                /*System.Windows.Forms.MessageBox.Show(rs);
+                System.Windows.Forms.MessageBox.Show(rs.Substring(0, rs.IndexOf('-')));
+                System.Windows.Forms.MessageBox.Show(item.Body.Substring(0, item.Body.IndexOf("\n<sign>") - 1));
+                */
+                BigInteger r = BigInteger.Parse("0" + rs.Substring(0, rs.IndexOf('-')), System.Globalization.NumberStyles.HexNumber);
+                BigInteger s = BigInteger.Parse("0" + rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
+                SHA256 sha = new SHA256();
+                if (SiGamalGenerator.verification(r, s, pubKey.G, sha.GetMessageDigestToBigInteger(item.Body.Substring(0, item.Body.IndexOf("\n<sign>") - 2)), pubKey.Y, pubKey.P))
                 {
-                    // Put Algorithm Verify Here
-                    string rs = item.Body.Substring(item.Body.IndexOf("<sign>"));
-                    rs = rs.Substring(6);
-                    rs = rs.Substring(0,rs.IndexOf("<sign>"));
-                    System.Windows.Forms.MessageBox.Show(rs);
-                    System.Windows.Forms.MessageBox.Show(rs.Substring(0,rs.IndexOf('-')));
-                    System.Windows.Forms.MessageBox.Show(item.Body.Substring(0,item.Body.IndexOf("\n<sign>")-1));
-                    BigInteger r = BigInteger.Parse("0" + rs.Substring(0,rs.IndexOf('-')),System.Globalization.NumberStyles.HexNumber);
-                    BigInteger s = BigInteger.Parse("0" + rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
-                    SHA256 sha = new SHA256();
-                    if (SiGamalGenerator.verification(r, s, pubKey.G, sha.GetMessageDigestToBigInteger(item.Body.Substring(0,item.Body.IndexOf("\n<sign>")-1)), pubKey.Y, pubKey.P))
-                    {
-                        System.Windows.Forms.MessageBox.Show("TRUE");
-                    }
-                    else
-                    {
-                        System.Windows.Forms.MessageBox.Show("FALSE");
-                    }
+                    System.Windows.Forms.MessageBox.Show("TRUE : Message is Valid");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("FALSE ; Message was edited");
                 }
 
             }
         }
-        
+
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
@@ -160,7 +144,7 @@ namespace SiGamalOutlookAddin
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }
