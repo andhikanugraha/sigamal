@@ -187,8 +187,43 @@ namespace SiGamal
             SiGamalEngine.Key.PrivateKey key = SiGamalEngine.Key.GeneratePrivateKeyFromFile(fileKey);
 
             signPTextBox.Text = key.P.ToString();
-            signGTextBox = key.G.ToString();
+            signGTextBox.Text = key.G.ToString();
             signXTextBox.Text = key.X.ToString();
+        }
+
+        private void GenerateSignature(object sender, RoutedEventArgs e)
+        {
+            string signature = Engine.GetSignature(UnsignedMessageTextBox.Text, signPTextBox.Text, signGTextBox.Text, signXTextBox.Text);
+
+            SignedMessageTextBox.Text = Engine.SignMessage(UnsignedMessageTextBox.Text, signature);
+
+            SignatureTextBox.Text = signature;
+        }
+
+        private void SaveSignedMessage(object sender, RoutedEventArgs e)
+        {
+            string signedMessage = Engine.SignMessage(UnsignedMessageTextBox.Text, SignatureTextBox.Text);
+
+            string path = ShowSaveDialog();
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                File.WriteAllText(path, signedMessage);
+            }
+        }
+
+        private void VerifySignature(object sender, RoutedEventArgs e)
+        {
+            bool valid = Engine.VerifySignedMessage(SignedMessageTextBox.Text, verifyPTextBox.Text, verifyGTextBox.Text, verifyYTextBox.Text);
+
+            if (valid)
+            {
+                ShowMessageBox("Valid.", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                ShowMessageBox("Invalid.");
+            }
         }
     }
 }

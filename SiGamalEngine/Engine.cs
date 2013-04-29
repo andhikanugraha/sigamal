@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SiGamalEngine
 {
-    class Engine
+    public class Engine
     {
         /// <summary>
         /// Verify the authenticity and integrity of a string which contains a message
@@ -14,9 +15,22 @@ namespace SiGamalEngine
         /// </summary>
         /// <param name="signedMessage">A string containing a message and its signature</param>
         /// <returns>True if the signature matches, false if it doesn't.</returns>
-        public bool VerifySignedMessage(string signedMessage)
+        public static bool VerifySignedMessage(string signedMessage, string p, string g, string y)
         {
-            return true;
+            string body = signedMessage.Substring(0, signedMessage.IndexOf("<sign>") - 1).Trim();
+
+            string rs = signedMessage.Substring(signedMessage.IndexOf("<sign>"));
+            rs = rs.Substring(6);
+            rs = rs.Substring(0, rs.IndexOf("<sign>"));
+
+            BigInteger r = BigInteger.Parse("0" + rs.Substring(0, rs.IndexOf('-')), System.Globalization.NumberStyles.HexNumber);
+            BigInteger s = BigInteger.Parse("0" + rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
+
+            SHA256 sha = new SHA256();
+
+            bool isValid = SiGamalGenerator.verification(r, s, BigInteger.Parse(g), sha.GetMessageDigestToBigInteger(body), BigInteger.Parse(y), BigInteger.Parse(p));
+
+            return isValid;
         }
 
         /// <summary>
@@ -24,9 +38,25 @@ namespace SiGamalEngine
         /// </summary>
         /// <param name="unsignedMessage"></param>
         /// <returns></returns>
-        public string SignMessage(string unsignedMessage, Key.PrivateKey privateKey)
+        public static string SignMessage(string unsignedMessage, string signature)
         {
-            return unsignedMessage;
+            unsignedMessage = unsignedMessage.Trim();
+
+            string signedMessage = unsignedMessage + "\n\n<sign>" + signature + "<sign>";
+
+            return signedMessage;
+        }
+
+        public static string GetSignature(string unsignedMessage, string p, string g, string x)
+        {
+            // Trim message
+            unsignedMessage = unsignedMessage.Trim();
+
+            var sha = new SHA256();
+            BigInteger hash = sha.GetMessageDigestToBigInteger(unsignedMessage);
+            string signature = SiGamalGenerator.signature(BigInteger.Parse(p), BigInteger.Parse(g), BigInteger.Parse(x), hash);
+
+            return signature;
         }
     }
 }

@@ -42,17 +42,17 @@
                         <Label Content="x" Grid.Column="4" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="5" Margin="0,4,0,0" Name="signXTextBox"/>
 
-                        <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
+                        <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0" Click="LoadPrivateKey"/>
                     </Grid>
                 </GroupBox>
 
                 <!-- Signature -->
                 <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,112,6" FontFamily="Consolas"/>
-                <Button Content="Generate" Width="100" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
+                <TextBox Name="SignatureTextBox" Grid.Row="4" Margin="6,0,112,6" FontFamily="Consolas"/>
+                <Button Content="Generate" Width="100" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6" Click="GenerateSignature"/>
                 
                 <!-- Save signed message button -->
-                <Button Content="Save signed message" Width="140" HorizontalAlignment="Right" Grid.Row="5" Margin="6"/>
+                <Button Content="Save signed message" Width="140" HorizontalAlignment="Right" Grid.Row="5" Margin="6" Click="SaveSignedMessage"/>
             </Grid>
         </TabItem>
         <TabItem Header="Verify">
@@ -92,11 +92,11 @@
                         <Label Content="y" Grid.Column="4" Margin="6,0,0,0"/>
                         <TextBox Grid.Column="5" Margin="0,4,0,0" Name="verifyYTextBox"/>
 
-                        <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
+                        <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0" Click="LoadPublicKey"/>
                     </Grid>
                 </GroupBox>
 
-                <Button Content="Verify" Width="100" HorizontalAlignment="Right" Grid.Row="3" Margin="6,0,6,6"/>
+                <Button Content="Verify" Width="100" HorizontalAlignment="Right" Grid.Row="3" Margin="6,0,6,6" Click="VerifySignature"/>
             </Grid>
         </TabItem>
         <TabItem Header="Generate Keys">
@@ -154,8 +154,8 @@
 
                 <!-- Actions -->
                 <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Generate" Click="GeneratePrivateKey"/>
-                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Load"/>
-                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="112,0,6,6" Width="100" Height="24" Content="Save" Click="SaveKeys"/>
+                <!--<Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Load"/>-->
+                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Save" Click="SaveKeys"/>
             </Grid>
         </TabItem>
     </TabControl>

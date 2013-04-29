@@ -11,8 +11,8 @@ namespace SiGamalEngine
     public class Key
     {
         BigInteger p, g, x;
-        
-        public Key(BigInteger _p, BigInteger _g, BigInteger _x) 
+
+        public Key(BigInteger _p, BigInteger _g, BigInteger _x)
         {
             p = _p;
             g = _g;
@@ -97,6 +97,7 @@ namespace SiGamalEngine
             return true;
         }
 
+
         public static Key GenerateRandomKey()
         {
             Key key = null;
@@ -135,7 +136,7 @@ namespace SiGamalEngine
             {
                 x *= -1;
             }
-            x %= (p-1);
+            x %= (p - 1);
             key = new Key(p, g, x);
 
             return key;
@@ -146,7 +147,7 @@ namespace SiGamalEngine
             PublicKey key = new PublicKey();
             key.G = g;
             key.P = p;
-            key.Y = BigInteger.ModPow(g, x, p);
+            key.Y = BigInteger.ModPow(g, x, p);// modular_pow(g, x, p);
             return key;
         }
 
@@ -216,6 +217,7 @@ namespace SiGamalEngine
 
         public void saveToFile(string fileName)
         {
+
             Key.SaveToFile(fileName + ".pub", this.GeneratePublicKey());
             Key.SaveToFile(fileName + ".pri", this.GeneratePrivateKey());
         }
@@ -244,7 +246,7 @@ namespace SiGamalEngine
             }
             string number_string = Encoding.ASCII.GetString(bytes_toRead.ToArray());
 
-            return BigInteger.Parse(number_string); 
+            return BigInteger.Parse(number_string);
         }
 
         private BigInteger modular_pow(BigInteger _base, BigInteger exp, BigInteger modulus)
@@ -261,11 +263,11 @@ namespace SiGamalEngine
         #region public key
         public class PublicKey
         {
-            private BigInteger g, y,p;
+            private BigInteger g, y, p;
 
             public PublicKey()
             {
-                
+
             }
 
             public BigInteger Y
@@ -277,7 +279,7 @@ namespace SiGamalEngine
             public BigInteger G
             {
                 get { return g; }
-                set { g = value;  }
+                set { g = value; }
             }
 
             public BigInteger P
