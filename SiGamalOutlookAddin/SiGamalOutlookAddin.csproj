@@ -156,6 +156,8 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Key.cs" />
+    <Compile Include="SHA256.cs" />
     <Compile Include="SiGamal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +188,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SiGamalGenerator.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
