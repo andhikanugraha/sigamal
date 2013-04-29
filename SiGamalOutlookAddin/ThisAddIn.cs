@@ -105,7 +105,9 @@ namespace SiGamalOutlookAddin
                 {
                     // Put Algorithm Sign Here
                     SHA256 sha = new SHA256();
-                    item.Body += "\n<sign>"+ SiGamalGenerator.signature(key.P,key.G,key.X,sha.GetMessageDigestToBigInteger(item.Body)) +"<sign>";
+                    BigInteger hash = sha.GetMessageDigestToBigInteger(item.Body);
+                    System.Windows.Forms.MessageBox.Show("Hash=" +sha.GetMessageDigestToBigInteger(item.Body).ToString());
+                    item.Body += "\n<sign>"+ SiGamalGenerator.signature(key.P,key.G,key.X,hash) +"<sign>";
                 }
 
             }
@@ -126,16 +128,17 @@ namespace SiGamalOutlookAddin
                     rs = rs.Substring(0,rs.IndexOf("<sign>"));
                     System.Windows.Forms.MessageBox.Show(rs);
                     System.Windows.Forms.MessageBox.Show(rs.Substring(0,rs.IndexOf('-')));
-                    BigInteger r = BigInteger.Parse(rs.Substring(0,rs.IndexOf('-')),System.Globalization.NumberStyles.HexNumber);
-                    BigInteger s = BigInteger.Parse(rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
+                    System.Windows.Forms.MessageBox.Show(item.Body.Substring(0,item.Body.IndexOf("\n<sign>")-1));
+                    BigInteger r = BigInteger.Parse("0" + rs.Substring(0,rs.IndexOf('-')),System.Globalization.NumberStyles.HexNumber);
+                    BigInteger s = BigInteger.Parse("0" + rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
                     SHA256 sha = new SHA256();
-                    if (SiGamalGenerator.verification(r, s, pubKey.G, sha.GetMessageDigestToBigInteger(item.Body.Substring(item.Body.IndexOf("\n<sign>"))), pubKey.Y, pubKey.P))
+                    if (SiGamalGenerator.verification(r, s, pubKey.G, sha.GetMessageDigestToBigInteger(item.Body.Substring(0,item.Body.IndexOf("\n<sign>")-1)), pubKey.Y, pubKey.P))
                     {
                         System.Windows.Forms.MessageBox.Show("TRUE");
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("TRUE");
+                        System.Windows.Forms.MessageBox.Show("FALSE");
                     }
                 }
 

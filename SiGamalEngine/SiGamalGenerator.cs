@@ -81,6 +81,11 @@ namespace SiGamalEngine
 
                 r = BigInteger.ModPow(g, k, p);
                 s = ((Hash - x * r) * inverse(k, p - 1)) % (p - 1);
+                System.Windows.Forms.MessageBox.Show(s.ToString());
+                if (s < 0)
+                    s = (p - 1) + s;
+
+                System.Windows.Forms.MessageBox.Show(s.ToString());
             }
 
             return r.ToString("X") + "-" + s.ToString("X"); // r dan s dikembalikan dalam bentuk "X"/hexadesimal
@@ -99,7 +104,9 @@ namespace SiGamalEngine
             BigInteger y,
             BigInteger p)
         {
-
+            System.Windows.Forms.MessageBox.Show(BigInteger.ModPow(g, Hash, p) + "\n" + ((BigInteger.ModPow(y, r, p) * BigInteger.ModPow(r, s, p)) % p) + "\n" + "Hash=" + Hash.ToString() + "," + r + "," + s);
+            //System.Windows.Forms.MessageBox.Show(BigInteger.ModPow(g, Hash, p).ToString());
+            //System.Windows.Forms.MessageBox.Show(((BigInteger.ModPow(y, r, p) * BigInteger.ModPow(r, s, p)) % p).ToString());
             return
                 0 < r && r < p &&
                 0 < s && s < p - 1 &&

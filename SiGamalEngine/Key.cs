@@ -127,7 +127,7 @@ namespace SiGamalEngine
             {
                 g *= -1;
             }
-
+            g %= p;
             rng.GetBytes(bytes);
 
             x = new BigInteger(bytes);
@@ -136,7 +136,7 @@ namespace SiGamalEngine
             {
                 x *= -1;
             }
-
+            x %= (p-1);
             key = new Key(p, g, x);
 
             return key;

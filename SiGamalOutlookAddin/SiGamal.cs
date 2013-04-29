@@ -51,7 +51,7 @@ namespace SiGamalOutlookAddin
             if (fileKey == null) return;
 
             Key.PublicKey pubkey = Key.GeneratePublicKeyFromFile(fileKey);
-
+            
             gVerifyTextBox.Text = pubkey.G.ToString();
             pVerifyTextBox.Text = pubkey.P.ToString();
             yVerifyTextBox.Text = pubkey.Y.ToString();

@@ -200,7 +200,7 @@ namespace SiGamalEngine
         /// <returns>BigInteger that represents the message Digest</returns>
         public BigInteger GetMessageDigestToBigInteger(string s)
         {
-            return BigInteger.Parse(GetMessageDigest(s), System.Globalization.NumberStyles.HexNumber);
+            return BigInteger.Parse("0"+ GetMessageDigest(s), System.Globalization.NumberStyles.HexNumber);
         }
 
         private int RightRotate(int i, int bits)
