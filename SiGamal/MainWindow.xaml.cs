@@ -119,17 +119,20 @@ namespace SiGamal
             try
             {
                 // Fetch ingredients for private key
-                BigInteger p = BigInteger.Parse(pTextBox.Text);
+                /*BigInteger p = BigInteger.Parse(pTextBox.Text);
                 BigInteger g = BigInteger.Parse(gTextBox.Text);
-                BigInteger x = BigInteger.Parse(xTextBox.Text);
+                BigInteger x = BigInteger.Parse(xTextBox.Text);*/
 
                 // Generate key
-                SiGamalEngine.Key k = new SiGamalEngine.Key(p, g, x);
+                SiGamalEngine.Key k = SiGamalEngine.Key.GenerateRandomKey();
                 SiGamalEngine.Key.PrivateKey pri = k.GeneratePrivateKey();
                 SiGamalEngine.Key.PublicKey pub = k.GeneratePublicKey();
 
                 xTextBox.Text = pri.X.ToString();
                 yTextBox.Text = pub.Y.ToString();
+                pTextBox.Text = pub.P.ToString();
+                gTextBox.Text = pub.G.ToString();
+
             }
             catch (Exception ex)
             {

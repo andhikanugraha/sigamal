@@ -19,7 +19,7 @@
                 <Label Content="Message" Grid.Row="0"/>
                 <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="6,4,6,4" Click="LoadUnsignedMessage"/>
                 <TextBox Name="UnsignedMessageTextBox"  Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" AcceptsTab="True"/>
-    
+
                 <!-- Signing key -->
                 <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
                     <Grid Margin="0,6,0,3">
@@ -50,13 +50,17 @@
                 <Label Content="Signature" Grid.Row="3"/>
                 <TextBox Name="SignatureTextBox" Grid.Row="4" Margin="6,0,112,6" FontFamily="Consolas"/>
                 <Button Content="Generate" Width="100" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6" Click="GenerateSignature"/>
-                
+
                 <!-- Save signed message button -->
                 <Button Content="Save signed message" Width="140" HorizontalAlignment="Right" Grid.Row="5" Margin="6" Click="SaveSignedMessage"/>
             </Grid>
         </TabItem>
         <TabItem Header="Verify">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="39*"/>
+                    <ColumnDefinition Width="215*"/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="20*"/>
@@ -65,12 +69,12 @@
                 </Grid.RowDefinitions>
 
                 <!-- Signed message -->
-                <Label Content="Signed message (including signature)" Grid.Row="0"/>
-                <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="6,4,6,4" Click="LoadSignedMessage"/>
-                <TextBox Name="SignedMessageTextBox" Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" AcceptsTab="True" />
+                <Label Content="Signed message (including signature)" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="0,4,6,4" Click="LoadSignedMessage" Grid.Column="1"/>
+                <TextBox Name="SignedMessageTextBox" Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" AcceptsTab="True" Grid.ColumnSpan="2" />
 
                 <!-- Signing key -->
-                <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
+                <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6" Grid.ColumnSpan="2">
                     <!-- TODO Update parameters for this key -->
                     <Grid Margin="0,6,0,3">
                         <Grid.ColumnDefinitions>
@@ -96,7 +100,7 @@
                     </Grid>
                 </GroupBox>
 
-                <Button Content="Verify" Width="100" HorizontalAlignment="Right" Grid.Row="3" Margin="6,0,6,6" Click="VerifySignature"/>
+                <Button Content="Verify" Width="100" HorizontalAlignment="Right" Grid.Row="3" Margin="0,0,6,6" Click="VerifySignature" Grid.Column="1"/>
             </Grid>
         </TabItem>
         <TabItem Header="Generate Keys">
@@ -104,10 +108,10 @@
                 <Grid.RowDefinitions>
                     <!-- Shared parameters -->
                     <RowDefinition Height="1*"/>
-                    
+
                     <!-- Non-shared parameters -->
                     <RowDefinition Height="1*"/>
-                    
+
                     <!-- Actions -->
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>

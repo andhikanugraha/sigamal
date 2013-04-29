@@ -17,14 +17,19 @@ namespace SiGamalEngine
         /// <returns>True if the signature matches, false if it doesn't.</returns>
         public static bool VerifySignedMessage(string signedMessage, string p, string g, string y)
         {
-            string body = signedMessage.Substring(0, signedMessage.IndexOf("<sign>") - 1).Trim();
-
+            string body = signedMessage.Substring(0, signedMessage.IndexOf("\n\n<sign>")).Trim();
+            
             string rs = signedMessage.Substring(signedMessage.IndexOf("<sign>"));
             rs = rs.Substring(6);
             rs = rs.Substring(0, rs.IndexOf("<sign>"));
 
             BigInteger r = BigInteger.Parse("0" + rs.Substring(0, rs.IndexOf('-')), System.Globalization.NumberStyles.HexNumber);
             BigInteger s = BigInteger.Parse("0" + rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
+
+
+            System.Diagnostics.Debug.WriteLine(r);
+
+            System.Diagnostics.Debug.WriteLine(s);
 
             SHA256 sha = new SHA256();
 
