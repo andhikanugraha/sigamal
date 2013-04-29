@@ -34,13 +34,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="p" Grid.Column="0"/>
-                        <TextBox Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="1" Margin="0,4,0,0" Name="signPTextBox"/>
 
                         <Label Content="g" Grid.Column="2" Margin="6,0,0,0"/>
-                        <TextBox Grid.Column="3" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="3" Margin="0,4,0,0" Name="signGTextBox"/>
 
                         <Label Content="x" Grid.Column="4" Margin="6,0,0,0"/>
-                        <TextBox Grid.Column="5" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="5" Margin="0,4,0,0" Name="signXTextBox"/>
 
                         <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
                     </Grid>
@@ -84,13 +84,13 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="p" Grid.Column="0"/>
-                        <TextBox Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="1" Margin="0,4,0,0" Name="verifyPTextBox"/>
 
                         <Label Content="g" Grid.Column="2" Margin="6,0,0,0"/>
-                        <TextBox Grid.Column="3" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="3" Margin="0,4,0,0" Name="verifyGTextBox"/>
 
                         <Label Content="y" Grid.Column="4" Margin="6,0,0,0"/>
-                        <TextBox Grid.Column="5" Margin="0,4,0,0"/>
+                        <TextBox Grid.Column="5" Margin="0,4,0,0" Name="verifyYTextBox"/>
 
                         <Button Content="Load Key" Grid.Column="6" Margin="6,4,6,0"/>
                     </Grid>
@@ -125,10 +125,10 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="p" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0" Name="pTextBox"/>
 
                         <Label Content="g" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0" Name="gTextBox"/>
                     </Grid>
                 </GroupBox>
 
@@ -145,17 +145,17 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Content="x (Private Key)" Grid.Row="0" Grid.Column="0"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,4,0,0" Name="xTextBox"/>
 
                         <Label Content="y (Public Key)" Grid.Row="1" Grid.Column="0"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,4,0,0" Name="yTextBox"/>
                     </Grid>
                 </GroupBox>
 
                 <!-- Actions -->
-                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Generate"/>
-                <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,112,6" Width="100" Height="24" Content="Load"/>
-                <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Save"/>
+                <Button HorizontalAlignment="Right" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Generate" Click="GeneratePrivateKey"/>
+                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="6,0,6,6" Width="100" Height="24" Content="Load"/>
+                <Button HorizontalAlignment="Left" Grid.Row="2" Margin="112,0,6,6" Width="100" Height="24" Content="Save" Click="SaveKeys"/>
             </Grid>
         </TabItem>
     </TabControl>

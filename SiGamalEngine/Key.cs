@@ -97,7 +97,6 @@ namespace SiGamalEngine
             return true;
         }
 
-
         public static Key GenerateRandomKey()
         {
             Key key = null;
