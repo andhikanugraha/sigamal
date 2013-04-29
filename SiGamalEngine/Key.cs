@@ -97,7 +97,6 @@ namespace SiGamalEngine
             return true;
         }
 
-
         public static Key GenerateRandomKey()
         {
             Key key = null;
@@ -147,7 +146,7 @@ namespace SiGamalEngine
             PublicKey key = new PublicKey();
             key.G = g;
             key.P = p;
-            key.Y = BigInteger.ModPow(g, x, p);// modular_pow(g, x, p);
+            key.Y = BigInteger.ModPow(g, x, p);
             return key;
         }
 
@@ -163,7 +162,7 @@ namespace SiGamalEngine
         public static void SaveToFile(string fileName, PublicKey key)
         {
             FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write);
-            
+
             byte[] byte_toWrite = Encoding.ASCII.GetBytes(key.Y.ToString()).ToArray();
 
             fs.Write(byte_toWrite, 0, byte_toWrite.Count());
@@ -217,7 +216,6 @@ namespace SiGamalEngine
 
         public void saveToFile(string fileName)
         {
-            
             Key.SaveToFile(fileName + ".pub", this.GeneratePublicKey());
             Key.SaveToFile(fileName + ".pri", this.GeneratePrivateKey());
         }
