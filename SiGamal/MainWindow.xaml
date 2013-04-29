@@ -18,7 +18,7 @@
                 <Label Content="Message" Grid.Row="0"/>
                 <Button Content="Load message" Grid.Row="0" HorizontalAlignment="Right" Width="120" Margin="6,4,6,4" Click="LoadUnsignedMessage"/>
                 <TextBox Name="UnsignedMessageTextBox"  Grid.Row="1" Margin="6,0,6,0" FontFamily="Consolas" AcceptsReturn="True" AcceptsTab="True"/>
-
+    
                 <!-- Signing key -->
                 <GroupBox Header="Key" Grid.Row="2" Margin="6,6,6,6">
                     <Grid Margin="0,6,0,3">
@@ -47,7 +47,7 @@
 
                 <!-- Signature -->
                 <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,106,6"/>
+                <TextBox Grid.Row="4" Margin="6,0,106,6" FontFamily="Consolas"/>
                 <Button Content="Generate" Width="94" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
             </Grid>
         </TabItem>
