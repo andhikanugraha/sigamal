@@ -83,6 +83,7 @@ namespace SiGamalEngine
                 s = ((Hash - x * r) * inverse(k, p - 1)) % (p - 1);
                 if (s < 0)
                     s = (p - 1) + s;
+
             }
 
             return r.ToString("X") + "-" + s.ToString("X"); // r dan s dikembalikan dalam bentuk "X"/hexadesimal
