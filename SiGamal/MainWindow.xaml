@@ -12,6 +12,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!-- Source message -->
@@ -47,8 +48,11 @@
 
                 <!-- Signature -->
                 <Label Content="Signature" Grid.Row="3"/>
-                <TextBox Grid.Row="4" Margin="6,0,106,6" FontFamily="Consolas"/>
-                <Button Content="Generate" Width="94" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
+                <TextBox Grid.Row="4" Margin="6,0,112,6" FontFamily="Consolas"/>
+                <Button Content="Generate" Width="100" HorizontalAlignment="Right" Grid.Row="4" Margin="6,0,6,6"/>
+                
+                <!-- Save signed message button -->
+                <Button Content="Save signed message" Width="140" HorizontalAlignment="Right" Grid.Row="5" Margin="6"/>
             </Grid>
         </TabItem>
         <TabItem Header="Verify">

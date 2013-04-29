@@ -40,6 +40,12 @@
   <ItemGroup>
     <Compile Include="Engine.cs" />
     <Compile Include="Key.cs" />
+    <Reference Include="System.Numerics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Key.cs" />
+    <Compile Include="SHA256.cs" />
+    <Compile Include="SiGamalGenerator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,8 @@ using System.Xml.Linq;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Office = Microsoft.Office.Core;
+using SiGamalEngine;
+using System.Numerics;
 
 namespace SiGamalOutlookAddin
 {
@@ -16,8 +18,7 @@ namespace SiGamalOutlookAddin
         // Controll @ Toolbar
         private string toolBarTagEmail = "Sign Email";
 
-        private Office.CommandBarButton signBarButton;
-        private Office.CommandBarButton verifyButton;
+        private Office.CommandBarButton siGamalBarButton;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -43,10 +44,10 @@ namespace SiGamalOutlookAddin
         private void AddToEmail(Microsoft.Office.Interop.Outlook.Inspector Inspector)
         {
             Outlook.MailItem _ObjMailItem = (Outlook.MailItem)Inspector.CurrentItem;
-
+            System.Diagnostics.Debug.WriteLine("Add to Mail");
             if (Inspector.CurrentItem is Outlook.MailItem)
             {
-                _ObjMailItem = (Outlook.MailItem)Inspector.CurrentItem;
+                System.Diagnostics.Debug.WriteLine("Add to Mail 1");
                 bool IsExists = false;
 
                 foreach (Office.CommandBar _ObjCmd in Inspector.CommandBars)
@@ -58,31 +59,33 @@ namespace SiGamalOutlookAddin
                     }
                 }
 
-                Office.CommandBar _ObjCommandBar = Inspector.CommandBars.Add(toolBarTagEmail, Office.MsoBarPosition.msoBarBottom, false, true);
-                signBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
-                verifyButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
+                Office.CommandBar _ObjCommandBar = Inspector.CommandBars.Add(toolBarTagEmail, Office.MsoBarPosition.msoBarTop, false, true);
+                siGamalBarButton = (Office.CommandBarButton)_ObjCommandBar.Controls.Add(Office.MsoControlType.msoControlButton, 1, missing, missing, true);
                 
                 if (!IsExists)
                 {
-                    signBarButton.Caption = "Sign Message";
-                    signBarButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
-                    signBarButton.FaceId = 500;
-                    signBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(signBarButton_Click);
-                    verifyButton.Caption = "Verify";
-                    verifyButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaption;
-                    verifyButton.FaceId = 500;
+                    System.Diagnostics.Debug.WriteLine("Add to Mail - 2");
+                    siGamalBarButton.Caption = "SiGamal";
+                    siGamalBarButton.Style = Office.MsoButtonStyle.msoButtonIconAndCaptionBelow;
+                    siGamalBarButton.FaceId = 500;
+                    siGamalBarButton.Click += new Office._CommandBarButtonEvents_ClickEventHandler(siGamalBarButton_Click);
                     _ObjCommandBar.Visible = true;
+                    siGamalBarButton.Visible = true;
                     
                 }
             }
         }
 
-        private void signBarButton_Click(Office.CommandBarButton ctrl, ref bool cancel)
+        private void siGamalBarButton_Click(Office.CommandBarButton ctrl, ref bool cancel)
         {
             try
             {
-                SignEmail();
-                System.Windows.Forms.MessageBox.Show("Signing ...");
+                SiGamal view = new SiGamal();
+                view.ShowDialog();
+                if (view.isSign)
+                    SignEmail(view.key.GeneratePrivateKey());
+                else
+                    VerifyEmail(view.pubKey);
             }
             catch (System.Exception ex)
             {
@@ -90,7 +93,7 @@ namespace SiGamalOutlookAddin
             }
         }
 
-        private void SignEmail()
+        private void SignEmail(Key.PrivateKey key)
         {
             Outlook.Application application = Globals.ThisAddIn.Application;
             Outlook.Inspector inspector = application.ActiveInspector();
@@ -100,11 +103,45 @@ namespace SiGamalOutlookAddin
             {
                 if (item.EntryID == null)
                 {
-                    item.Body += "\n Sign";
+                    // Put Algorithm Sign Here
+                    SHA256 sha = new SHA256();
+                    item.Body += "\n<sign>"+ SiGamalGenerator.signature(key.P,key.G,key.X,sha.GetMessageDigestToBigInteger(item.Body)) +"<sign>";
                 }
 
             }
         }
+        private void VerifyEmail(Key.PublicKey pubKey)
+        {
+            Outlook.Application application = Globals.ThisAddIn.Application;
+            Outlook.Inspector inspector = application.ActiveInspector();
+            Outlook.MailItem item = (Outlook.MailItem)inspector.CurrentItem;
+            //Outlook.MailItem item = Outlook. Inspector.CurrentItem as Outlook.MailItem;
+            if (item != null)
+            {
+                if (item.EntryID == null)
+                {
+                    // Put Algorithm Verify Here
+                    string rs = item.Body.Substring(item.Body.IndexOf("<sign>"));
+                    rs = rs.Substring(6);
+                    rs = rs.Substring(0,rs.IndexOf("<sign>"));
+                    System.Windows.Forms.MessageBox.Show(rs);
+                    System.Windows.Forms.MessageBox.Show(rs.Substring(0,rs.IndexOf('-')));
+                    BigInteger r = BigInteger.Parse(rs.Substring(0,rs.IndexOf('-')),System.Globalization.NumberStyles.HexNumber);
+                    BigInteger s = BigInteger.Parse(rs.Substring(rs.IndexOf('-') + 1), System.Globalization.NumberStyles.HexNumber);
+                    SHA256 sha = new SHA256();
+                    if (SiGamalGenerator.verification(r, s, pubKey.G, sha.GetMessageDigestToBigInteger(item.Body.Substring(item.Body.IndexOf("\n<sign>"))), pubKey.Y, pubKey.P))
+                    {
+                        System.Windows.Forms.MessageBox.Show("TRUE");
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("TRUE");
+                    }
+                }
+
+            }
+        }
+        
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
